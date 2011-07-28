@@ -157,7 +157,7 @@ int feedback_counter=0;
     al_destroy_bitmap(membitmap);
 
 
-    membitmap = al_load_bitmap("images/PPlogo.tga");
+    membitmap = al_load_bitmap("images/PPlogo.bmp");
     if (!membitmap) {
        //abort_example("%s not found or failed to load\n", filename);
     }

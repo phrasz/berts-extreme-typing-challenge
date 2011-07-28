@@ -1,0 +1,8 @@
+Bert's EXTREME Typing Challenge
+
+Version 1.0:
+=Game released to the public.
+
+Version 1.1:
++Added Feedback of what is typed by the player.
++Added built in icon file.
