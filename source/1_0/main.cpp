@@ -65,8 +65,6 @@ char strawberry[]="strawberry";
 char buffer [33];
 char reportletter[2];
 //char buffer [33];
-char feedback[10]="";
-int feedback_counter=0;
 
 
     //GS3
@@ -828,21 +826,6 @@ ALLEGRO_MIXER* mixer;
                 }
             }
 
-            if(gamestate==4){ //game is playing
-                    if(round ==5){
-                        if(feedback_counter==0){ //If it's the first letter copy
-                            strcpy(feedback, reportletter);
-                        }
-                        else {
-                            strcat(feedback, reportletter);
-                        }
-                            feedback_counter++;
-                            al_draw_bitmap(black,155,385,0); //copy over countdown
-                            //al_draw_bitmap(black,155,385,0);
-                            al_draw_textf(f, al_map_rgb(0, 0, 0), 170, 400, 0,feedback); //draw word
-                            al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0,feedback); //draw word
-                        }
-            }
 
                 //done=0;
         }
@@ -1620,32 +1603,39 @@ ALLEGRO_MIXER* mixer;
 
                                 credcount++; //only load once
                                    //mainmenu=1;
-                                al_draw_bitmap(credits,0,0,0);
                         } fadespeed++;
                         }
 
 
                         else if (credcount==1){
+                            //if(fadespeed==0)
 
-                                                 // Always draw bg
-                            if(fadespeed<128){ //FADE IN -- correction to colors
-                                    //al_clear_to_color(al_map_rgb_f(0, 0, 0));
-                                    al_draw_tinted_bitmap(cred1,al_map_rgba_f(1*(255-fadespeed),1*(255-fadespeed),1*(255-fadespeed),(255-fadespeed)/255.0),(dx-245.0),(dy-130.0),0);
-                                    al_flip_display();
-                                    //fadespeed+=2;
-                              }
+                            if(fadespeed<128){ //FADE IN
+                                al_draw_tinted_bitmap(credits,al_map_rgba_f(1*(255-fadespeed),1*(255-fadespeed),1*(255-fadespeed),(255-fadespeed)/255.0),0,0,0);
+                                al_draw_tinted_bitmap(cred1,al_map_rgba_f(1*(255-fadespeed),1*(255-fadespeed),1*(255-fadespeed),(255-fadespeed)/255.0),(dx-245.0),(dy-130.0),0);
+                            }
+                           al_flip_display();
+                        }
 
-                                if(fadespeed>512 && fadespeed<768){ //FADE OUT after 128 cycle pause
+
+                        else if(credcount ==2){
+                             // Always draw bg
+        //                    if(fadespeed<256){ //FADE IN
+        //                            //al_clear_to_color(al_map_rgb_f(0, 0, 0));
+        //                            al_draw_tinted_bitmap(cred1,al_map_rgba_f(1*(255-fadespeed),1*(255-fadespeed),1*(255-fadespeed),(255-fadespeed)/255.0),(dx-245.0),(dy-130.0),0);
+        //                            al_flip_display();
+        //                            //fadespeed+=2;
+        //                      }
+
+                                if(fadespeed>255 && fadespeed<512){ //FADE OUT
                                     //al_clear_to_color(al_map_rgb_f(0, 0, 0)); //exception handle fade glitch
-                                    //
-                                    al_draw_tinted_bitmap(cred1,al_map_rgba_f(1*((fadespeed-256)-255),1*((fadespeed-256)-255),1*((fadespeed-256)-255),((fadespeed-256)-255)/255.0),(dx-245.0),(dy-130.0),0);//when values re set to 256 a fade "pop" occurs...
+                                    al_draw_tinted_bitmap(cred1,al_map_rgba_f(1*(fadespeed-255),1*(fadespeed-255),1*(fadespeed-255),(fadespeed-255)/255.0),(dx-245.0),(dy-130.0),0);//when values re set to 256 a fade "pop" occurs...
                                     al_flip_display();
                                     fadespeed+=1;
                                 }
 
                         }
-
-                        else if(credcount ==2){
+                        else if(credcount ==3){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1663,7 +1653,7 @@ ALLEGRO_MIXER* mixer;
                                 }
 
                         }
-                        else if(credcount ==3){
+                        else if(credcount ==4){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1681,7 +1671,7 @@ ALLEGRO_MIXER* mixer;
                                 }
 
                         }
-                        else if(credcount ==4){
+                        else if(credcount ==5){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1699,7 +1689,7 @@ ALLEGRO_MIXER* mixer;
                                 }
 
                         }
-                        else if(credcount ==5){
+                        else if(credcount ==6){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1717,7 +1707,7 @@ ALLEGRO_MIXER* mixer;
                                 }
 
                         }
-                        else if(credcount ==6){
+                        else if(credcount ==7){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1735,7 +1725,7 @@ ALLEGRO_MIXER* mixer;
                                 }
 
                         }
-                        else if(credcount ==7){
+                        else if(credcount ==8){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1753,7 +1743,7 @@ ALLEGRO_MIXER* mixer;
                                 }
 
                         }
-                        else if(credcount ==8){
+                        else if(credcount ==9){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1773,7 +1763,7 @@ ALLEGRO_MIXER* mixer;
                         }
 
 
-                        else if(credcount ==9){
+                        else if(credcount ==10){
 
                                                  // Always draw bg
                             if(fadespeed<128){ //FADE IN -- correction to colors
@@ -1793,7 +1783,7 @@ ALLEGRO_MIXER* mixer;
                         }
 
 
-                        else if (credcount==15 || credcount ==99){ //DESTROY elements
+                        else if (credcount==99){ //DESTROY elements
                             al_destroy_bitmap(cred1);
                             al_destroy_bitmap(cred2);
                             al_destroy_bitmap(cred3);
@@ -1806,14 +1796,12 @@ ALLEGRO_MIXER* mixer;
                             al_destroy_bitmap(credits);
                             round =7;
                         }
-
                         fadespeed+=2;
 
                         if(fadespeed>=768){
                                //round=2;
                                fadespeed=0;
                                credcount++;
-                               al_draw_bitmap(credits,0,0,0);
                         }
 
                     }
@@ -1969,61 +1957,50 @@ ALLEGRO_MIXER* mixer;
               //  if(credcount=0){
                 al_draw_bitmap(gbg,0,0,0); //draw first screen (current values/words/strikes)
 
-                //reset feedback string
-                strcpy (feedback,"");
-                feedback_counter=0;
                 if(wordc==0){ //no word, load pear
                     ptso=4000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, pear); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, pear); //draw word
                     tot_keys=4; //Total amount of allowed key strokes
                    // strcpy(buffer, pear);
                 }
                 else if(wordc==1){ //kiwi
                     ptso=4000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, kiwi); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, kiwi); //draw word
                     tot_keys=4; //Total amount of allowed key strokes
                     //strcpy(buffer, kiwi);
                 }
                 else if(wordc==2){ //apple
                     ptso=5000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, apple); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, apple); //draw word
                     tot_keys=5; //Total amount of allowed key strokes
                     //strcpy(buffer, apple);
                 }
                 else if(wordc==3){ //grape
                     ptso=5000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, grape); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, grape); //draw word
                     tot_keys=5; //Total amount of allowed key strokes
                     //strcpy(buffer, grape);
                 }
                 else if(wordc==4){ //lemon
                     ptso=5000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, lemon); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, lemon); //draw word
                     tot_keys=5; //Total amount of allowed key strokes
                    // strcpy(buffer, lemon);
                 }
                 else if(wordc==5){ //banana
                     ptso=6000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, banana); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, banana); //draw word
                     tot_keys=6; //Total amount of allowed key strokes
                    // strcpy(buffer, banana);
                 }
                 else if(wordc==6){ //orange
                     ptso=6000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, orange); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, orange); //draw word
                     tot_keys=6; //Total amount of allowed key strokes
                     //strcpy(buffer, orange);
                 }
                 else if(wordc==7){ //strawberry
                     ptso=10000;
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 135, 180, 0, strawberry); //draw word
                     al_draw_textf(f, al_map_rgb(222, 125, 0), 130, 180, 0, strawberry); //draw word
                     tot_keys=10; //Total amount of allowed key strokes
                     //strcpy(buffer, strawberry);
@@ -2031,30 +2008,25 @@ ALLEGRO_MIXER* mixer;
                 }
 
                 if(strikes==1){
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 937, 595, 0, "X");
                     al_draw_textf(f2, al_map_rgb(255, 0, 0), 935, 595, 0, "X");
 
                 }
                 else if (strikes==2){
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 937, 595, 0, "XX");
                     al_draw_textf(f2, al_map_rgb(255, 0, 0), 935, 595, 0, "XX");
                     //GAMEOVER if EXTREME
                     if(wpm==1){round=5;credcount=3;}
                 }
                 else if (strikes==3){
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 937, 595, 0, "XXX");
                     al_draw_textf(f2, al_map_rgb(255, 0, 0), 935, 595, 0, "XXX");
                     //GAMEOVER if hard
                     if(wpm==3){round=5;credcount=3;}
                 }
                 else if (strikes==4){
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 937, 595, 0, "XXXX");
                     al_draw_textf(f2, al_map_rgb(255, 0, 0), 935, 595, 0, "XXXX");
                     //GAMEOVER if medium
                     if(wpm==5){round=5;credcount=3;}
                 }
                 else if (strikes==5){
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 937, 595, 0, "XXXXX");
                     al_draw_textf(f2, al_map_rgb(255, 0, 0), 935, 595, 0, "XXXXX");
                     //GAMEOVER if easy
                     if(wpm==10){round=5;credcount=3;}
@@ -2090,29 +2062,23 @@ ALLEGRO_MIXER* mixer;
 
                 if(fadespeed>=0&&fadespeed<60){
                     al_draw_bitmap(black,155,385,0);
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 167, 400, 0, "Get Ready!!!"); //draw word
-                    al_draw_textf(f, al_map_rgb(0, 211, 10), 162, 400, 0, "Get Ready!!!"); //draw word
+                    al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "Get Ready!!!"); //draw word
                 }
                 if(fadespeed>=60&&fadespeed<120){
                     al_draw_bitmap(black,155,385,0);
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 170, 400, 0, "     3      "); //draw word
                     al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "     3      "); //draw word
                 }
                 if(fadespeed>=120&&fadespeed<180){
                     al_draw_bitmap(black,155,385,0);
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 170, 400, 0, "     2      "); //draw word
-                    al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "     2      "); //draw word
+                al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "     2      "); //draw word
                 }
                 if(fadespeed>=180&&fadespeed<240){
                     al_draw_bitmap(black,155,385,0);
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 170, 400, 0, "     1      "); //draw word
-                    al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "     1      "); //draw word
+                al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "     1      "); //draw word
                 }
                 if(fadespeed>=240&&fadespeed<300){
                     al_draw_bitmap(black,155,385,0);
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 170, 400, 0, "    GO!     "); //draw word
-                    al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "    GO!     "); //draw word
-                    fadespeed=300; //SKIP the rest of the count, as to start the game
+                al_draw_textf(f, al_map_rgb(0, 211, 10), 165, 400, 0, "    GO!     "); //draw word
                 }
 
                 al_flip_display();
@@ -2124,7 +2090,6 @@ ALLEGRO_MIXER* mixer;
                     startload=ptso;
                 }
                 fadespeed+=1;
-
 
             }
 
@@ -2190,7 +2155,7 @@ ALLEGRO_MIXER* mixer;
                         round++;
                         credcount=6;
                         wordc++;
-                        //pts+=ptso; may be redundant
+                        pts+=ptso;
                         if(wordc==8){//GAME==WON!
                             round=7;
                         }
@@ -2223,38 +2188,26 @@ ALLEGRO_MIXER* mixer;
                 al_draw_bitmap(notice_blank,116,113,0); //draw first screen for easy
 
                 if(credcount==1){
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 505, 250, 0, "Hello?");
-                    al_draw_textf(f, al_map_rgb(222, 125, 0), 500, 250, 0, "Hello?");
+                    al_draw_textf(f, al_map_rgb(222, 125, 0), 450, 300, 0, "Hello?");
                 }
                 if(credcount==2){
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 355, 230, 0, "Wrong Key!");
                     al_draw_textf(f, al_map_rgb(255, 0, 0), 350, 230, 0, "Wrong Key!");
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 283, 375, 0, "Next time watch out for the key:");
-                    al_draw_textf(f2, al_map_rgb(0, 174, 8), 280, 375, 0, "Next time watch out for the key:");
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 953, 375, 0, reportletter);
-                    al_draw_textf(f2, al_map_rgb(255, 0,0), 950, 375, 0, reportletter);
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 283, 425, 0, "You had typed:");
-                    al_draw_textf(f2, al_map_rgb(0, 174, 8), 280, 425, 0, "You had typed:");
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 603, 425, 0, feedback);
-                    al_draw_textf(f2, al_map_rgb(255, 144,0), 600, 425, 0, feedback);
+                    al_draw_textf(f2, al_map_rgb(0, 214, 11), 280, 375, 0, "Next time watch out for the key:");
+                    al_draw_textf(f2, al_map_rgb(0, 214, 11), 950, 375, 0, reportletter);
                 }
                 if(credcount==3){
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 355, 250, 0, "GAME OVER!");
-                    al_draw_textf(f, al_map_rgb(255, 0, 0), 350, 250, 0, "GAME OVER!");
+                    al_draw_textf(f, al_map_rgb(255, 0, 0), 500, 300, 0, "GAME OVER!");
                 }
                 if(credcount==4){
-                    al_draw_textf(f, al_map_rgb(0, 0, 0), 330, 230, 0, "Woah! Slow Down!");
                     al_draw_textf(f, al_map_rgb(255, 0, 0), 325, 230, 0, "Woah! Slow Down!");
                 }
                 if(credcount==6){
-                    al_draw_textf(f, al_map_rgb(255, 255, 255), 435, 230, 0, "Alright!");
-                    al_draw_textf(f, al_map_rgb(30, 0, 255), 430, 230, 0, "Alright!");
-                    al_draw_textf(f2, al_map_rgb(0, 0, 0), 353, 375, 0, "Prepare for your next word!");
+                    al_draw_textf(f, al_map_rgb(255, 0, 0), 430, 230, 0, "Alright!");
                     al_draw_textf(f2, al_map_rgb(0, 214, 11), 350, 375, 0, "Prepare for your next word!");
                 }
 
                 al_flip_display();
-                //printf("\nGame: wpm(%i), letts.(%i), tot_keys(%i), tot_time(%i), ptso(%i)\n", wpm, letterspressed,tot_keys, tot_time, ptso);
+                printf("\nGame: wpm(%i), letts.(%i), tot_keys(%i), tot_time(%i), ptso(%i)\n", wpm, letterspressed,tot_keys, tot_time, ptso);
             }
 
             else if(round==7){//GAME WIN!!!!
@@ -2319,7 +2272,7 @@ ALLEGRO_MIXER* mixer;
 //-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~//
 //                  DATA DESTRUCTION
    //BITMAP *black, *powered, *PPlogo, *gimp, *presents, *menuscreen;
-    //al_destroy_bitmap(membitmap);
+    al_destroy_bitmap(membitmap);
    // al_destroy_bitmap(bitmap);
     al_destroy_bitmap(opt1);
     al_destroy_bitmap(opt2);
